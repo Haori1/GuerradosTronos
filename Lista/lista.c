@@ -173,8 +173,8 @@ void rem_cNode ( int pos, cList *list ) {
       }
       
       cNode *aux = curr->next;
-      curr->next = curr->next->next;
-      curr->next->next->prev = curr;
+      curr->next = aux->next;
+      aux->next->prev = curr;
 
       free ( aux );
       
