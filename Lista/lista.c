@@ -100,6 +100,7 @@ void add_cNode ( int pos, int data, cList *list ) { /* TROCAR DADO POR TIPO CHAR
 
    /* MEIO DA LISTA */
 
+   curr = curr->prev;
    node->next = curr->next;
    curr->next->prev = node;
    curr->next = node;
