@@ -8,7 +8,7 @@ int main (void){
     printList(list);
     printf("----------------------\n");
     rem_cNode(1, list);
-    add_cNode(0, 33, list);
+    add_cNode(1, 33, list);
     printList(list);
 
 
