@@ -1,0 +1,41 @@
+Header "lista.h":
+
+   Criação e manuseio de listas.
+   Funções:
+
+      -Alocar lista               -> cList* list_create();
+
+         Não recebe entrada.
+         Retorna endereço da lista.
+
+      -Criar elemento             -> cNode* cNode_create ( int dado );
+
+         Recebe como entrada o dado a ser armazenado. ( MUDAR P/ TIPO character DEPOIS!!! )
+         Retorna endereço do elemento.
+         *Não use essa função para adicionar elementos, ela é usada internamente por 'void add_cNode'.       
+
+      -Adicionar elemento à lista -> void add_cNode ( int pos, int data, cList *list );
+
+         Recebe como entrada a posição (numerada a partir de 0, sendo 0 a 1ª posicao, 1 a 2ª, etc.); o dado inserido ( MUDAR P/ TIPO character DEPOIS ); o endereço da lista.
+         Não retorna nenhum valor.
+
+      -Remover elemento da lista  -> void rem_cNode ( int pos, cList *list );
+
+         Recebe como entrada a posição a qual se deseja apagar (para acessar a primeira posição, deve se colocar o valor 0 na entrada); o endereço da lista.
+         Não retorna nenhum valor.
+
+      -Imprime lista              -> void printList ( cList *list );
+
+         adivinha
+
+      -Desaloca lista             ->void free_list ( cList *list );
+
+         quem esquecer de usar essa função vai pro inferno.
+   
+
+Ambiente de programação:
+   -Ubuntu 16.04.2 LTS
+   -GCC 5.4.0
+   -gedit 3.18.3
+
+   ̿̿ ̿̿ ̿̿ ̿'̿'\̵͇̿̿\з= ( ▀ ͜͞ʖ▀) =ε/̵͇̿̿/’̿’̿ ̿ ̿̿ ̿̿ ̿̿
