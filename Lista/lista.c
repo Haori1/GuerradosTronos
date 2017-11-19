@@ -8,19 +8,19 @@ cList* list_create() {
 
    cList *list = (cList*) malloc ( sizeof ( cList ) );
    list->first = NULL;
-   list->last = NULL; 
+   list->last = NULL;
 
    return list;
-} 
+}
 
 /* FUNC 2 --- ALOCA ELEMENTO */
 
-cNode* cNode_create ( int dado ) {  /* TROCAR DADO POR TIPO CHARACTER */
+cNode* cNode_create ( Character* character ) {
 
    cNode *node = (cNode*) malloc ( sizeof ( cNode ) );
-   node->data = dado; /*TROCAR DADO POR TIPO CHARACTER */
+   node->character = character;
    node->next = NULL;
-   node->prev = NULL;   
+   node->prev = NULL;
 
    return node;
 }
@@ -43,14 +43,14 @@ void free_list ( cList *list ) {
    }
 
    free( list );
-   
+
    return;
 }
 
 /* FUNC 4 --- ADICIONA ELEMENTO */
 
-void add_cNode ( int pos, int data, cList *list ) { /* TROCAR DADO POR TIPO CHARACTER */
-   cNode *node = cNode_create ( data );
+void add_cNode ( int pos, Character* character, cList *list ) {
+   cNode *node = cNode_create ( character );
    cNode *curr = list->first;
    int ctr = 0;
 
@@ -61,23 +61,23 @@ void add_cNode ( int pos, int data, cList *list ) { /* TROCAR DADO POR TIPO CHAR
 
          list->first->prev = node;
 
-      }      
+      }
       node->next = list->first;
       list->first = node;
 
-      if ( list->last = NULL ) {
+      if ( list->last == NULL ) {
 
       list->last = list->first;
-   
+
       }
-      
+
       return;
 
    }
-   
+
 
    /* FIM DA LISTA */
-   
+
    if ( pos > 0 ) {
 
       while ( ctr < ( pos ) ) {
@@ -88,10 +88,10 @@ void add_cNode ( int pos, int data, cList *list ) { /* TROCAR DADO POR TIPO CHAR
             node->prev = curr;
 
             return;
-         
+
          }
 
-         
+
          curr = curr->next;
          ctr++;
 
@@ -107,7 +107,7 @@ void add_cNode ( int pos, int data, cList *list ) { /* TROCAR DADO POR TIPO CHAR
 
    }
 
-   
+
    return;
 }
 
@@ -117,7 +117,7 @@ void rem_cNode ( int pos, cList *list ) {
    cNode *curr = list->first;
    int ctr = 0;
 
-   /* INICIO DA LISTA */   
+   /* INICIO DA LISTA */
 
    if ( curr == NULL ) {
 
@@ -156,7 +156,7 @@ void rem_cNode ( int pos, cList *list ) {
    /* FIM DA LISTA */
 
       while ( ctr < ( pos - 1 ) ) {
-         
+
          if ( curr->next->next == NULL ) {
 
             list->last = curr;
@@ -172,13 +172,13 @@ void rem_cNode ( int pos, cList *list ) {
          ctr++;
 
       }
-      
+
       cNode *aux = curr->next;
       curr->next = aux->next;
       aux->next->prev = curr;
 
       free ( aux );
-      
+
 
    }
 
@@ -199,7 +199,7 @@ void printList ( cList *list ) {
 
    while ( aux != NULL ) {
 
-      printf( "%d\n", aux->data );
+      printf( "%s\n", aux->character->name );
       aux = aux->next;
 
    }
