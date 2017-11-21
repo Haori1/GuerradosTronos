@@ -35,6 +35,7 @@ void free_list ( cList *list ) {
       while ( list->first != NULL ) {
 
          aux = list->first->next;   /*Guarda endereco do proximo */
+         character_free ( list->first->character );
          free( list->first );       /*Apaga o atual */
          list->first = aux;         /*Vai pro proximo */
 
@@ -127,6 +128,7 @@ void rem_cNode ( int pos, cList *list ) {
 
    if ( list->first == list->last ) {
 
+      character_free ( list->first->character );
       free ( list->first );
       list->first = NULL;
       list->last = NULL;
@@ -140,12 +142,14 @@ void rem_cNode ( int pos, cList *list ) {
 
          list->first = NULL;
          list->last = NULL;
+         character_free ( curr->character );
          free ( curr );
          return;
 
       } else {
 
          list->first = curr->next;
+         character_free ( curr->character );
          free ( curr );
          return;
 
@@ -160,6 +164,7 @@ void rem_cNode ( int pos, cList *list ) {
          if ( curr->next->next == NULL ) {
 
             list->last = curr;
+            character_free ( curr->next->character );
             free ( curr->next );
             list->last->next = NULL;
             return;
@@ -177,6 +182,7 @@ void rem_cNode ( int pos, cList *list ) {
       curr->next = aux->next;
       aux->next->prev = curr;
 
+      character_free ( aux->character );
       free ( aux );
 
 
@@ -205,4 +211,14 @@ void printList ( cList *list ) {
    }
 
    return;
+}
+
+/* FUNCAO 7 --- LIBERA MEMORIA DE PERSONAGEM */
+
+void character_free ( Character *character ) {
+
+   free (character->name);
+   free (character->house);
+   free (character);
+
 }
