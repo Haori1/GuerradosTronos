@@ -31,7 +31,11 @@ Header "lista.h":
       -Desaloca lista             ->void free_list ( cList *list );
 
          quem esquecer de usar essa função vai pro inferno.
-   
+         
+      -Libera mem. de personagem  ->void free_character ( Character* character );
+         
+         Recebe como entrada o endereco de um struct Character
+         Desaloca a memoria utilizada, nao retorna nenhum valor.
 
 Ambiente de programação:
    -Ubuntu 16.04.2 LTS
