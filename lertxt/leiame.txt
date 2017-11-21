@@ -3,31 +3,31 @@ Header "lertxt.h":
    Processamento do arquivo personagens.txt.
    Funções:
 
-      -Criar lista com os personagens -> cList* create_roster ( FILE *fp )
+      -Criar lista com os personagens                      -> cList* create_roster ( FILE *fp );
          
          Recebe como entrada o arquivo a ser lido.
          Gera como saida o endereco da lista contendo 16 personagens escolhidos aleatoriamente a partir de um arquivo formatado conforme declarado na especificacao do trabalho.
          *IMPORTANTE: A função free_list ( cList *list ) declarada em lista.h deve ser chamada em algum momento apos a execucao desse comando.
 
-      -Identifica numero de personagens contidos no arquivo -> int character_number ( FILE *fp )
+      -Identifica numero de personagens contidos no arquivo -> int character_number ( FILE *fp );
 
          Recebe como entrada o arquivo a ser lido.
          Diz o numero de personagens no arquivo.
          *Usada internamente pela funcao cList* create_roster.
 
-      -Gera vetor com 16 numeros unicos e pseudo-aleatorios -> int* lucky_sixteen ( int num )
+      -Gera vetor com 16 numeros unicos e pseudo-aleatorios -> int* lucky_sixteen ( int num );
 
          Recebe como entrada o limite superior da faixa de valores possiveis.
          Retorna um vetor contendo 16 numeros unicos e pseudo-aleatorios entre 1 e num.
          *Usada internamente pela funcao cList* create_roster.
 
-      -Cria personagem -> Character* character_create ( char *_name, char *_house, int _agility, int _strength, int _intelligence, int _health )
+      -Cria personagem                                       -> Character* character_create ( char *_name, char *_house, int _agility, int _strength, int _intelligence, int _health )
 
          Recebe as caracteristicas do personagem.
          Retorna o endereco do personagem.
          *Usada internamente pela funcao void list_populate.
 
-      -Preenche lista -> void list_populate ( FILE *fp, int *vec, cList *list )
+      -Preenche lista                                        -> void list_populate ( FILE *fp, int *vec, cList *list );
 
          Recebe o arquivo de entrada, um vetor de inteiros, e uma lista encadeada que suporte o tipo Character.
          Nao retorna valor algum, apenas modifica os valores contidos em memoria.
