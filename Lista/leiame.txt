@@ -8,15 +8,15 @@ Header "lista.h":
          Não recebe entrada.
          Retorna endereço da lista.
 
-      -Criar elemento             -> cNode* cNode_create ( int dado );
+      -Criar elemento             -> cNode* cNode_create ( Character *character );
 
-         Recebe como entrada o dado a ser armazenado. ( MUDAR P/ TIPO character DEPOIS!!! )
+         Recebe como entrada o dado a ser armazenado. 
          Retorna endereço do elemento.
          *Não use essa função para adicionar elementos, ela é usada internamente por 'void add_cNode'.       
 
-      -Adicionar elemento à lista -> void add_cNode ( int pos, int data, cList *list );
+      -Adicionar elemento à lista -> void add_cNode ( int pos, Character *character, cList *list );
 
-         Recebe como entrada a posição (numerada a partir de 0, sendo 0 a 1ª posicao, 1 a 2ª, etc.); o dado inserido ( MUDAR P/ TIPO character DEPOIS ); o endereço da lista.
+         Recebe como entrada a posição (numerada a partir de 0, sendo 0 a 1ª posicao, 1 a 2ª, etc.); o dado inserido; o endereço     da lista.
          Não retorna nenhum valor.
 
       -Remover elemento da lista  -> void rem_cNode ( int pos, cList *list );
