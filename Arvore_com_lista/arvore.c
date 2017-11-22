@@ -13,13 +13,13 @@ t_node* tree_character_fill(t_node* root){
         return root;
     }
 
-    FILE* fp = fopen("personagens.txt", "r");           //O ponteiro fp recebe o arquivo.
+    FILE* fp = fopen("personagens.txt", "r");           /*O ponteiro fp recebe o arquivo.*/
 
-    cList* list = create_roster(fp);                    //Lista com os personagens.
+    cList* list = create_roster(fp);                    /*Lista com os personagens.*/
 
     fclose(fp);
 
-    fila* fila = alocafila();                           //Criação da fila.
+    fila* fila = alocafila();                           /*Criação da fila.*/
 
     t_node* node = NULL;                                //Nó que recebe da fila.
 
@@ -65,8 +65,9 @@ void tree_print_preorder(t_node* root){
         return;
 
     } else {
-
-    print_node(root);                   //Processa a raiz.
+    if(root->character != NULL){
+        print_node(root);                   /*Processa a raiz.*/
+    }
     tree_print_preorder(root->left);    //Chamada recursiva a esquerda.
     tree_print_preorder(root->right);   //Chamada recursiva a direita.
 

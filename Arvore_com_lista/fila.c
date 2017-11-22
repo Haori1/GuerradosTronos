@@ -66,9 +66,13 @@ t_node* retirar(fila* fila){
 
     }//end if()
 
-    retorno = item->node;                       //A variável de retorno recebe o dado do primeiro item da fila.
+    retorno = item->node;                       /*A variável de retorno recebe o dado do primeiro item da fila.*/
 
-    fila->primeiro = fila->primeiro->proximo;   //O primeiro da fila agora aponta para o próximo da fila.
+    if(fila->primeiro == fila->ultimo){
+        fila->ultimo = NULL;
+    }
+
+    fila->primeiro = fila->primeiro->proximo;   /*O primeiro da fila agora aponta para o próximo da fila.*/
 
     free(item);                                 //O valor retirado é liberado da fila.
 
