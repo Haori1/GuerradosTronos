@@ -2,13 +2,14 @@
 #include "arvore.h"
 #include "lista.h"
 #include "lertxt.h"
-#include "fila.h"
 
 int main(void){
     t_node* root = tree_create();
-    root = tree_character_fill(root);
+    cList* list = NULL;
+    list = list_fill(list);
+    tree_character_fill(root, list);
     tree_print_preorder(root);
-
+    printf("%d\n", height(root));
 
 
     return 0;

@@ -7,69 +7,86 @@
 
 /*--------------------------------------------------------------------------------------------*/
 
-t_node* tree_character_fill(t_node* root){
+int height(t_node* root){
     if(root == NULL){
-
-        return root;
+        return -1;
     }
 
+    int hl = height(root->left);
+
+    int hr = height(root->right);
+
+    if (hl < hr){
+
+        return hr + 1;
+
+    } else {
+
+        return hl + 1;
+
+    }
+}
+
+/*--------------------------------------------------------------------------------------------*/
+
+void tree_complete(cList* list){
+ list = list_fill(list);
+
+}
+
+/*--------------------------------------------------------------------------------------------*/
+
+cList* list_fill(cList* list){
     FILE* fp = fopen("personagens.txt", "r");           /*O ponteiro fp recebe o arquivo.*/
 
-    cList* list = create_roster(fp);                    /*Lista com os personagens.*/
+    list = create_roster(fp);                           /*Lista com os personagens.*/
 
     fclose(fp);
 
-    fila* fila = alocafila();                           /*Criação da fila.*/
+    return list;
+}
 
-    t_node* node = NULL;                                //Nó que recebe da fila.
+/*--------------------------------------------------------------------------------------------*/
 
-    cNode* aux = NULL;                                  //Var. Aux.
+void tree_character_fill(t_node* root, cList* list){
+    if(root == NULL){
 
-    inserir(fila, root);                                //A raiz é enfileirada.
+        return;
+    }
 
-    aux = list->first;                                  //A var. aux recebe o primeiro da lista.
+    cNode* aux;                                         /*Var. Aux.*/
 
-    while(!verivazia(fila)){                            //Enquanto a fila não estiver vazia o processo continua.
-
-        node = retirar(fila);                           //O nó recebe o primeiro da fila.
-
-        if(node->left == NULL && node->right == NULL){  //Se o nó for folha ele recebe um personagem da lista.
-
-            node->character = aux->character;
-
-            aux = aux->next;
-
-        }
-
-        if(node->left != NULL){                         //A fila permite percorrer a arvore em largura.
-
-            inserir(fila, node->left);
-
-        } else if(node->right != NULL){
-
-            inserir(fila, node->right);
-
-        }//end if() largura
-    }//end while()
+    aux = list->first;                                  /*A var. aux recebe o primeiro da lista.*/
 
 
+    if(root->left == NULL && root->right == NULL){
 
-    apagafila(fila);
-    return root;
+        root->character = aux->character;
+
+        rem_cNode(0, list);
+        
+        return;
+    } else {
+        tree_character_fill(root->right, list);
+        tree_character_fill(root->left, list);
+    }
+    return;
 }
 
 /*--------------------------------------------------------------------------------------------*/
 void tree_print_preorder(t_node* root){
-    if(root == NULL){                   //Se a raiz estiver vazia a função retorna.
+    if(root == NULL){                   /*Se a raiz estiver vazia a função retorna.*/
 
         return;
 
     } else {
+
     if(root->character != NULL){
+
         print_node(root);                   /*Processa a raiz.*/
     }
-    tree_print_preorder(root->left);    //Chamada recursiva a esquerda.
-    tree_print_preorder(root->right);   //Chamada recursiva a direita.
+    tree_print_preorder(root->left);    /*Chamada recursiva a esquerda.*/
+    tree_print_preorder(root->right);   /*Chamada recursiva a direita.*/
 
     }
 }
