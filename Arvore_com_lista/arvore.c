@@ -58,13 +58,10 @@ void tree_character_fill(t_node* root, cList* list){
 
     aux = list->first;                                  /*A var. aux recebe o primeiro da lista.*/
 
-
     if(root->left == NULL && root->right == NULL){
 
         root->character = aux->character;
 
-        rem_cNode(0, list);
-        
         return;
     } else {
         tree_character_fill(root->right, list);
