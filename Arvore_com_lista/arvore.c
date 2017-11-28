@@ -48,27 +48,42 @@ cList* list_fill(cList* list){
 
 /*--------------------------------------------------------------------------------------------*/
 
-void tree_character_fill(t_node* root, cList* list){
+void tree_character_fill(t_node* root, cList* list, cNode* aux){            //refazer com fila e contador recursivo
     if(root == NULL){
 
         return;
     }
+    fila* fila = alocafila();
 
-    cNode* aux;                                         /*Var. Aux.*/
+    t_node* node = NULL;
 
-    aux = list->first;                                  /*A var. aux recebe o primeiro da lista.*/
+    inserir(fila, root);
 
-    if(root->left == NULL && root->right == NULL){
+    aux = list->first;
 
-        root->character = aux->character;
+    while(!verivazia(fila)){
+        node = retirar(fila);
 
-        return;
-    } else {
-        tree_character_fill(root->right, list);
-        tree_character_fill(root->left, list);
-    }
+        if(node->left == NULL && node->right == NULL){
+            node->character = aux->character;
+            aux = aux->next;
+        }
+
+        if(node->left != NULL){
+            inserir(fila, node->left);
+        }
+        if(node->right != NULL){
+            inserir(fila, node->right);
+        }
+
+
+    }/*end while()*/
+
+
+
+
     return;
-}
+}/*end tree_character_fill()*/
 
 /*--------------------------------------------------------------------------------------------*/
 void tree_print_preorder(t_node* root){
@@ -135,6 +150,20 @@ t_node* node_create(){                                  /* Função que aloca o 
 
     return node;                                        /* Retorno do nó criado. */
 }
+
+/*--------------------------------------------------------------------------------------------*/
+
+void tree_free(t_node* tree){
+    if(tree == NULL){
+        return;
+    }
+
+    tree_free(tree->left);
+    tree_free(tree->right);
+    free(tree);
+}
+
+/*--------------------------------------------------------------------------------------------*/
 
 void print_node(t_node* root){
     printf(" %s\n", root->character->name);

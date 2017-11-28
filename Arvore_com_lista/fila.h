@@ -1,7 +1,7 @@
-#ifndef ____FILA____H__
-#define ____FILA____H__
 #include "lista.h"
 #include "arvore.h"
+#ifndef ____FILA____H__
+#define ____FILA____H__
 
 typedef struct item{
 

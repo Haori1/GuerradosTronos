@@ -35,10 +35,10 @@ void free_list ( cList *list ) {
       while ( list->first != NULL ) {
 
          aux = list->first->next;   /*Guarda endereco do proximo */
-         
+
+         character_free(list->first->character);
          free( list->first );       /*Apaga o atual */
          list->first = aux;         /*Vai pro proximo */
-
       }
 
    }
@@ -128,7 +128,7 @@ void rem_cNode ( int pos, cList *list ) {
 
    if ( list->first == list->last ) {
 
-     
+
       free ( list->first );
       list->first = NULL;
       list->last = NULL;
@@ -142,14 +142,14 @@ void rem_cNode ( int pos, cList *list ) {
 
          list->first = NULL;
          list->last = NULL;
-         
+
          free ( curr );
          return;
 
       } else {
 
          list->first = curr->next;
-         
+
          free ( curr );
          return;
 
@@ -164,7 +164,7 @@ void rem_cNode ( int pos, cList *list ) {
          if ( curr->next->next == NULL ) {
 
             list->last = curr;
-            
+
             free ( curr->next );
             list->last->next = NULL;
             return;
@@ -182,7 +182,7 @@ void rem_cNode ( int pos, cList *list ) {
       curr->next = aux->next;
       aux->next->prev = curr;
 
-      
+
       free ( aux );
 
 
