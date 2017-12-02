@@ -7,28 +7,6 @@
 
 /*--------------------------------------------------------------------------------------------*/
 
-int height(t_node* root){
-    if(root == NULL){
-        return -1;
-    }
-
-    int hl = height(root->left);
-
-    int hr = height(root->right);
-
-    if (hl < hr){
-
-        return hr + 1;
-
-    } else {
-
-        return hl + 1;
-
-    }
-}
-
-/*--------------------------------------------------------------------------------------------*/
-
 void tree_complete(cList* list){
  list = list_fill(list);
 
@@ -101,14 +79,13 @@ void tree_print_preorder(t_node* root){
     tree_print_preorder(root->right);   /*Chamada recursiva a direita.*/
 
     return;
-    
+
 }
 
 
 /*--------------------------------------------------------------------------------------------*/
 
-t_node* character_search_tree(cNode* element, t_node* root){
-    t_node *retorno;  
+t_node* character_search_tree(cNode* element, t_node* root, t_node *retorno){    /**/
 
     if(root == NULL){
         return NULL;
@@ -122,10 +99,10 @@ t_node* character_search_tree(cNode* element, t_node* root){
     }
 
     if ( retorno == NULL ) {
-    retorno = character_search_tree(element, root->left);
+    retorno = character_search_tree(element, root->left, retorno);
     }
     if ( retorno == NULL ) {
-    retorno = character_search_tree(element, root->right);
+    retorno = character_search_tree(element, root->right, retorno);
     }
 
     return retorno;
@@ -134,7 +111,7 @@ t_node* character_search_tree(cNode* element, t_node* root){
 
 /*--------------------------------------------------------------------------------------------*/
 
-t_node* tree_create(){
+t_node* tree_create(){                              /*Chama a função tree_fill() 4 vezes para preencher os níveis da árvore*/
 
     t_node* root = node_create();
     for(int i = 0; i < 4; i++){
@@ -181,7 +158,7 @@ t_node* node_create(){                                  /* Função que aloca o 
 
 /*--------------------------------------------------------------------------------------------*/
 
-void tree_free(t_node* tree){
+void tree_free(t_node* tree){                           /*Função que libera a árvore de forma recursiva*/
     if(tree == NULL){
         return;
     }

@@ -7,7 +7,7 @@ int character_number( FILE *fp ) {
    int num = 0;
    char cur;
 
-   while ( cur != EOF ) {
+   while ( cur != EOF ) {   /*End of file*/
 
       cur = fgetc ( fp );
       if ( cur == 012 ) {  /* ASCII 012 == newline */
@@ -67,8 +67,8 @@ char* string_read ( FILE *fp ) {
    fpos_t pos;
    int tam = 0, ctr = 0;
 
-   fgetpos ( fp, &pos );
-   while ( fgetc ( fp ) != 054 ) { /* ASCII 054 == virgula */
+   fgetpos ( fp, &pos );                /*Salva a posição do cursor dentro do arquivo*/
+   while ( fgetc ( fp ) != 054 ) { /* ASCII 054 == virgula */   /*Conta o numero de letras ate a virgula*/
 
       tam++;
 
@@ -83,7 +83,7 @@ char* string_read ( FILE *fp ) {
       ctr++;
 
    }
-   fseek ( fp, 2, SEEK_CUR ); /* Avanca o cursor duas posicoes, 'engolindo' a virgula e o espaco que vem a seguir. */
+   fseek ( fp, 2, SEEK_CUR ); /* Avanca o cursor duas posicoes, 'engolindo' a virgula e o espaco que vem a seguir. */ /*Pula 2 bytes, espaço e vírgula*/
 
 
    return vec;
@@ -111,7 +111,7 @@ void line_locate ( FILE *fp, int line ) {
 
 /* FUNCAO 5 --- PREENCHE UMA LISTA COM OS PERSONAGENS */
 
-void list_populate ( FILE *fp, int *vec, cList *list ) {
+void list_populate ( FILE *fp, int *vec, cList *list ) {    /*Arquivo, Vetor de números aleatórios, lista*/
 
    Character *character_cast, *character;
    int ctr = 0;
