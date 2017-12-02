@@ -1,17 +1,31 @@
 #include "batalha.h"
 
-void battle_finder ( t_node* root ) {
+void battle_finder ( t_node* root, t_node* player ) {
 
-   if ( root->left != NULL ) {
+   if ( root->left->character != NULL ) {
 
-   /*Batalha acontece */
-   /*Preenche root com vencedor*/
+      if ( root->left->character == player->character ) {
+
+         root->character = player_battle ( player, root->right );
+
+      } else if ( root->right->character == player->character ) {
+
+         root->character = player_battle ( player, root->left );
+
+      } else {
+
+         srand ( time ( NULL ) );
+         int stat = ( rand () % 4 ) + 1;
+         root->character = fight ( root->right->character, root->left->character, stat);
+
+      }
+
    return;
 
    }
 
-   battle_finder ( root->left );
-   battle_finder ( root->right );
+   battle_finder ( root->left, player );
+   battle_finder ( root->right, player );
    
    return;
 }
@@ -21,42 +35,41 @@ Character* player_battle ( t_node *player, t_node *enemy ) {
    printf("Seu personagem: %s da Casa %s\n", player->character->name, player->character->house);
    
    if ( player->character->agility < 101 ) {
-      printf("1) Agility      : %d", player->character->agility);
+      printf("1) Agility      : %d\n", player->character->agility);
    } else {
       printf("X)              : XX");
    }
 
    if ( player->character->strength < 101 ) {
-      printf("2) Strength     : %d", player->character->strength);
+      printf("2) Strength     : %d\n", player->character->strength);
    } else {
-      printf("X)              : XX");
+      printf("X)              : XX\n");
    }
 
    if ( player->character->intelligence < 101 ) {
-      printf("3) Intelligence : %d", player->character->intelligence);
+      printf("3) Intelligence : %d\n", player->character->intelligence);
    } else {
-      printf("X)              : XX");
+      printf("X)              : XX\n");
    }
 
    if ( player->character->health < 101 ) {
-      printf("4) Health       : %d", player->character->health);
+      printf("4) Health       : %d\n\n", player->character->health);
    } else {
-      printf("X)              : XX");
+      printf("X)              : XX\n\n");
    }
 
    int choice, stat;
-   printf("O adversario: %s da Casa %s\nSelecione um atributo: ", enemy->character->name, enemy->character->house);
+   printf("O adversario: %s da Casa %s\n\nSelecione um atributo: ", enemy->character->name, enemy->character->house);
    scanf( "%d", &choice );
 
    while ( !validStat ( player, choice ) ) {
 
-      printf("Escolha invalida.\nSelecione um atributo: ");
+      printf("Escolha invalida.\n\nSelecione um atributo: ");
       scanf( "%d", &choice );
 
    }
 
-   Character* winner = fight ( player->character, enemy->character, choice );
-   return winner;
+   return fight ( player->character, enemy->character, choice );  
 }
 
 int validStat ( t_node* player, int choice ) {
@@ -93,7 +106,6 @@ int validStat ( t_node* player, int choice ) {
       default:
          return 0;
       }
-   }
    
 }
 
@@ -131,6 +143,5 @@ Character* fight ( Character* fighter_one, Character* fighter_two, int atribute 
       default:
          return 0;
       }
-   }
-
+   
 }
