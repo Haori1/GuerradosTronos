@@ -25,6 +25,21 @@ cNode* cNode_create ( Character* character ) {
    return node;
 }
 
+cNode* character_search(int pos, cList* list){
+    int ctr = 0;
+    cNode* aux = NULL;
+    aux = list->first;
+    do{
+        aux = aux->next;
+        if(aux == NULL){
+            break;
+        }
+        ctr++;
+    }while(ctr != pos);
+
+    return aux;
+}
+
 /* FUNC 3 --- DESALOCA LISTA */
 
 void free_list ( cList *list ) {

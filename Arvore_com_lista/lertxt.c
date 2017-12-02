@@ -5,8 +5,8 @@
 int character_number( FILE *fp ) {
 
    int num = 0;
-   char cur;   
-   
+   char cur;
+
    while ( cur != EOF ) {
 
       cur = fgetc ( fp );
@@ -14,8 +14,8 @@ int character_number( FILE *fp ) {
 
          num++;
 
-      } 
-   
+      }
+
    }
 
    return num;
@@ -28,14 +28,14 @@ int* lucky_sixteen( int num ) {
    srand ( time ( NULL ) );   /* Define a semente a ser usada */
 
    int *vec = ( int * ) malloc ( 16 * (sizeof ( int ) ) ),
-        ctra = 0, ctrb = 0, numb = 0                      ; 
-   
+        ctra = 0, ctrb = 0, numb = 0                      ;
+
    while ( ctrb < 16 ) {   /* Garante que nao tenha nenhum lixo no vetor */
 
       vec[ctrb] == -1;
       ctrb++;
 
-   } 
+   }
    ctrb = 0;
 
    while ( ctra < 16 ) {
@@ -56,7 +56,7 @@ int* lucky_sixteen( int num ) {
       }
       ctrb = 0;
    }
-  
+
    return vec;
 }
 
@@ -72,7 +72,7 @@ char* string_read ( FILE *fp ) {
 
       tam++;
 
-   }  
+   }
    char *vec = ( char * ) malloc ( ( tam + 1 ) * sizeof ( char ) );
    vec[tam] = 000; /* ASCII 000 == NULL */
    fsetpos ( fp, &pos );
@@ -84,7 +84,7 @@ char* string_read ( FILE *fp ) {
 
    }
    fseek ( fp, 2, SEEK_CUR ); /* Avanca o cursor duas posicoes, 'engolindo' a virgula e o espaco que vem a seguir. */
-   
+
 
    return vec;
 }
@@ -97,14 +97,14 @@ void line_locate ( FILE *fp, int line ) {
 
       rewind ( fp );
 
-      while ( ctr < line ) { 
+      while ( ctr < line ) {
 
          if ( fgetc ( fp ) == 012 ) { /* ASCII 012 == newline */
             ctr++;
          }
 
       }
-      
+
 
    return;
 }
@@ -144,7 +144,7 @@ Character* character_create ( char *_name, char *_house, int _agility, int _stre
 
    Character *character = malloc ( sizeof ( Character ) );
    character->name  = ( char * ) malloc ( sizeof(char) * ( strlen (_name) + 1 ) );
-   character->house = ( char * ) malloc ( sizeof(char) * ( strlen (_house) + 1 ) );   
+   character->house = ( char * ) malloc ( sizeof(char) * ( strlen (_house) + 1 ) );
 
    strcpy ( character->name, _name );
    strcpy ( character->house, _house );
@@ -160,7 +160,7 @@ Character* character_create ( char *_name, char *_house, int _agility, int _stre
 /* FUNCAO 7 --- LE ARQUIVO E GERA LISTA COM PERSONAGENS ALEATORIOS */
 
 cList* create_roster ( FILE *fp ) {
-   
+
    int num = character_number( fp );
    int *vec = lucky_sixteen ( num );
    cList *list = list_create();

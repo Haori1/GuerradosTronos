@@ -48,7 +48,7 @@ cList* list_fill(cList* list){
 
 /*--------------------------------------------------------------------------------------------*/
 
-void tree_character_fill(t_node* root, cList* list, cNode* aux){            //refazer com fila e contador recursivo
+void tree_character_fill(t_node* root, cList* list, cNode* aux){    /*Preenche os nós folhas da árvore com os personagens*/
     if(root == NULL){
 
         return;
@@ -103,6 +103,25 @@ void tree_print_preorder(t_node* root){
     }
 }
 
+
+/*--------------------------------------------------------------------------------------------*/
+
+t_node* character_search_tree(cNode* element, t_node* root){
+    if(root == NULL){
+        return root;
+    }
+
+    if(root->character->name == element->character->name){
+
+        return root;
+
+    }
+
+    return character_search_tree(element, root->left);
+    return character_search_tree(element, root->right);
+    return root;
+
+}//end character_search_tree()
 
 /*--------------------------------------------------------------------------------------------*/
 

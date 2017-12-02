@@ -6,7 +6,7 @@
 #define ____ESCOLHA__H__
 #define NUM 16          /*Numero de personagens totais*/
 
-void escolha(cList* list);
+int escolha(cList* list);
 
 
 

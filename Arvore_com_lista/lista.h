@@ -37,6 +37,7 @@ typedef struct {
 
 cList* list_create();
 cNode* cNode_create ( Character* character );
+cNode* character_search(int pos, cList* list);
 void free_list ( cList *list );
 void add_cNode ( int pos, Character* character, cList *list );
 void rem_cNode ( int pos, cList *list );

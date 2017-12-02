@@ -1,11 +1,15 @@
 #include "escolha.h"
-
-void escolha(cList* list){
+#include <stdlib.h>
+int escolha(cList* list){
+    system("clear");
     cNode* element = NULL;
     element = list->first;
-    srand(time(NULL));
-    int choice = srand();
+    int choice = rand();
+    srand(time(NULL));              /*Define a seed do rand()*/
+    printf("Escolha seu personagem:\n");
     for(int i = 0; i < NUM; i++){
+
+        choice = rand();            /*Um número aleatório é gerado a cada laço de repetição*/
 
         printf("Personagem %d:\n", (i + 1));
 
@@ -35,5 +39,9 @@ void escolha(cList* list){
         element = element->next;
 
     }/*end for()*/
+    printf("\n");
+    int n = -1;
+    scanf("%d", &n);
+    return n;
 
 }/*end escolha()*/
