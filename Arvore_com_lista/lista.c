@@ -29,13 +29,14 @@ cNode* character_search(int pos, cList* list){
     int ctr = 0;
     cNode* aux = NULL;
     aux = list->first;
-    do{
-        aux = aux->next;
-        if(aux == NULL){
-            break;
-        }
-        ctr++;
-    }while(ctr != pos);
+    while ( aux->next != NULL ) {
+
+       if ( ctr == pos ) {
+          break;
+       }
+       aux = aux->next;
+       ctr++;
+    }
 
     return aux;
 }
