@@ -32,7 +32,7 @@ int* lucky_sixteen( int num ) {
 
    while ( ctrb < 16 ) {   /* Garante que nao tenha nenhum lixo no vetor */
 
-      vec[ctrb] == -1;
+      vec[ctrb] = -1;
       ctrb++;
 
    }
@@ -74,7 +74,7 @@ char* string_read ( FILE *fp ) {
 
    }
    char *vec = ( char * ) malloc ( ( tam + 1 ) * sizeof ( char ) );
-   vec[tam] = 000; /* ASCII 000 == NULL */
+   vec[tam] = 000; /* ASCII 000 == NULL */  // possível erro para a função de buscar o personagem na árvore
    fsetpos ( fp, &pos );
 
    while ( ctr < tam ) {
@@ -142,7 +142,7 @@ void list_populate ( FILE *fp, int *vec, cList *list ) {
 
 Character* character_create ( char *_name, char *_house, int _agility, int _strength, int _intelligence, int _health) {
 
-   Character *character = malloc ( sizeof ( Character ) );
+   Character *character = (Character *) malloc ( sizeof ( Character ) );
    character->name  = ( char * ) malloc ( sizeof(char) * ( strlen (_name) + 1 ) );
    character->house = ( char * ) malloc ( sizeof(char) * ( strlen (_house) + 1 ) );
 
