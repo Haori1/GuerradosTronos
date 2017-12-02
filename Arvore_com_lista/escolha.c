@@ -32,9 +32,9 @@ int escolha(cList* list){
         }
 
         if(choice % 4 == 3){
-            printf("Health: %d\n", element->character->health);
+            printf("Health: %d\n\n", element->character->health);
         } else {
-            printf("Health: **\n");
+            printf("Health: **\n\n");
         }
         element = element->next;
 

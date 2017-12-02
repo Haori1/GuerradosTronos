@@ -91,7 +91,7 @@ void tree_print_preorder(t_node* root){
 
         return;
 
-    } else {
+    }
 
     if(root->character != NULL){
 
@@ -100,26 +100,35 @@ void tree_print_preorder(t_node* root){
     tree_print_preorder(root->left);    /*Chamada recursiva a esquerda.*/
     tree_print_preorder(root->right);   /*Chamada recursiva a direita.*/
 
-    }
+    return;
+    
 }
 
 
 /*--------------------------------------------------------------------------------------------*/
 
 t_node* character_search_tree(cNode* element, t_node* root){
+    t_node *retorno;  
+
     if(root == NULL){
-        return root;
+        return NULL;
     }
 
-    if(root->character->name == element->character->name){
+    if(root->character == element->character){
 
-        return root;
+        retorno = root;
+        return retorno;
 
     }
 
-    return character_search_tree(element, root->left);
-    return character_search_tree(element, root->right);
-    return root;
+    if ( retorno == NULL ) {
+    retorno = character_search_tree(element, root->left);
+    }
+    if ( retorno == NULL ) {
+    retorno = character_search_tree(element, root->right);
+    }
+
+    return retorno;
 
 }//end character_search_tree()
 
@@ -185,5 +194,5 @@ void tree_free(t_node* tree){
 /*--------------------------------------------------------------------------------------------*/
 
 void print_node(t_node* root){
-    printf(" %s\n", root->character->name);
+    printf("%s\n", root->character->name);
 }

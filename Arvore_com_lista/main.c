@@ -15,7 +15,6 @@ int main(void){
     tree_print_preorder(root);
     printf("%d\n", height(root));
     int i = escolha(list);
-    aux = NULL;
     aux = character_search(i - 1, list);
     player = character_search_tree(aux, root);
     printf("%s\n", player->character->name);

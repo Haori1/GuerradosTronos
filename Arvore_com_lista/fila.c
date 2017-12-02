@@ -4,7 +4,7 @@
 
 /*------------------------------------*/
 
-void imprimefila(fila* fila){
+/* void imprimefila(fila* fila){
 
     if(verivazia(fila)){                //Se a fila estiver vazia não há o que imprimir.
 
@@ -26,7 +26,7 @@ void imprimefila(fila* fila){
 
     printf(" NULL\n");                  //Final da fila.
 
-}//end imprimefila()
+}//end imprimefila() */
 
 /*------------------------------------*/
 
