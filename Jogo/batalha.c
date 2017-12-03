@@ -1,10 +1,10 @@
 #include "batalha.h"
 
-void battle_finder ( t_node* root, t_node* player ) {
+void battle_finder (t_node* root, t_node* player) {
 
    if ( root->left->character != NULL ) {
 
-      if ( root->left->character == player->character ) {
+      if ( root->left->character == player->character ) {   /*Procura o nó pai do player antes de ocorrer a batalha*/
 
          root->character = player_battle ( player, root->right );
 
@@ -12,7 +12,7 @@ void battle_finder ( t_node* root, t_node* player ) {
 
          root->character = player_battle ( player, root->left );
 
-      } else {
+     } else {                                              /*Se o personagem não for um player, os personagens lutam escolhendo um atributo aleatório*/
 
          srand ( time ( NULL ) );
          int stat = ( rand () % 4 ) + 1;
@@ -30,7 +30,7 @@ void battle_finder ( t_node* root, t_node* player ) {
    return;
 }
 
-Character* player_battle ( t_node *player, t_node *enemy ) {
+Character* player_battle (t_node *player, t_node *enemy) {            /*Imprime o nome do personagem e a casa do player e os status para serem utilizados durante a batalha, pega a escolha de atributo para ser utilizada na batalha, chama a função validStat() para verificar se a escolha do player é válida, ocorre a luta entre o player e a cpu, se o player perde o arquivo do log é marcado e a última batalha do player é inserida no arquivo de log, e o vencedor é retornado*/
 
    printf("Seu personagem: %s da Casa %s\n", player->character->name, player->character->house);
 
@@ -62,28 +62,28 @@ Character* player_battle ( t_node *player, t_node *enemy ) {
    printf("O adversario: %s da Casa %s\n\nSelecione um atributo: ", enemy->character->name, enemy->character->house);
    scanf( "%d", &choice );
 
-   while ( !validStat ( player, choice ) ) {
+   while ( !validStat ( player, choice ) ) {            /*Verifica se a escolha é válida*/
 
       printf("Escolha invalida.\n\nSelecione um atributo: ");
       scanf( "%d", &choice );
 
    }
 
-   Character* winner = fight ( player->character, enemy->character, choice );
-   update_stat ( player->character, choice );
+   Character* winner = fight ( player->character, enemy->character, choice );       /*Após a escolha de atributos a luta é realizada pegando o vencedor da luta*/
+   update_stat ( player->character, choice );                                       /*Atualiza os status dos atributos*/
 
-   if ( winner != player->character ) {
+   if ( winner != player->character ) {                                             /*Player não for o ganhador a função log_terminate() insere um símbolo para marcar o arquivo onde o player foi derrotado*/
 
       log_terminate ( );
-      log_end ( player->character , enemy->character, choice );
+      log_end ( player->character , enemy->character, choice );                     /*Última batalha do player é inserida no log*/
 
    }
 
-   return winner;
+   return winner;                                                                   /*O vencedor é retornado*/
 
 }
 
-int validStat ( t_node* player, int choice ) {
+int validStat (t_node* player, int choice) {          /*Verifica se o status do atributo é válido se for válido ele retorna 1 se não for válido ele retorna 0*/
 
    switch ( choice ) {
 
@@ -120,7 +120,7 @@ int validStat ( t_node* player, int choice ) {
 
 }
 
-Character* fight ( Character* fighter_one, Character* fighter_two, int atribute ) {
+Character* fight (Character* fighter_one, Character* fighter_two, int atribute) { /*Compara os atributos, atualiza o log e retorna o vencedor da luta*/
 
    switch ( atribute ) {
 
@@ -165,7 +165,7 @@ Character* fight ( Character* fighter_one, Character* fighter_two, int atribute 
 
 }
 
-void update_stat ( Character* player, int choice ) {
+void update_stat (Character* player, int choice) {    /*Retira ou adiciona 100 para atualizar os status dos atributos*/
 
    if ( player->agility > 101 ) {
             player->agility -= 100;
@@ -216,7 +216,7 @@ void update_stat ( Character* player, int choice ) {
    return;
 }
 
-void log_update ( Character* winner, Character* loser, int choice ) {
+void log_update (Character* winner, Character* loser, int choice) {  /*Os Logs das batalhas vão sendo colocados no arquivo log.txt*/
 
    FILE *arq = fopen ( "log.txt", "a" );
 
@@ -244,7 +244,7 @@ void log_update ( Character* winner, Character* loser, int choice ) {
 
 }
 
-void log_round ( int num ) {
+void log_round (int num) {    /*O log round insere o número do round no arquivo log.txt*/
 
    FILE *arq = fopen ( "log.txt", "a+" );
 
@@ -254,7 +254,7 @@ void log_round ( int num ) {
 
 }
 
-void log_end ( Character* player, Character* enemy, int choice ) {
+void log_end (Character* player, Character* enemy, int choice) {      /*Insere a última batalha do player no log2.txt*/
 
    FILE *arq = fopen ( "log2.txt", "a+" );
 
@@ -281,7 +281,7 @@ void log_end ( Character* player, Character* enemy, int choice ) {
    return;
 }
 
-void log_victory ( Character* winner ) {
+void log_victory (Character* winner) {        /*Insere no arquivo log2.txt o vencedor da batalha*/
 
    FILE *arq = fopen ( "log2.txt", "a+" );
 
@@ -291,7 +291,7 @@ void log_victory ( Character* winner ) {
 
 }
 
-void log_terminate ( ) {
+void log_terminate () {           /*Insere o símbolo ~ (126) - condição de parada de impressão*/
 
    FILE *arq = fopen ( "log.txt", "a+" );
 
@@ -301,15 +301,15 @@ void log_terminate ( ) {
 
 }
 
-void log_print ( ) {
+void log_print () {                /*Imprime o log até o final do arquivo ou encontrar o símbolo ~ (126)*/
 
-   FILE *arq = fopen ( "log2.txt", "r" );
+   FILE *arq = fopen ( "log2.txt", "r" );   /*Imprime o campẽao e o último round do player*/
    rewind ( arq );
    char cursor = 0;
 
    while ( 1 ) {
 
-      cursor = getc ( arq );
+      cursor = getc ( arq );                /*O char do arquivo vai sendo passado para o cursor e vai sendo imprimido na tela*/
       if ( feof( arq ) ) {
          break;
       }
@@ -320,13 +320,13 @@ void log_print ( ) {
 
    fclose ( arq );
 
-   arq = fopen ( "log.txt", "r" );
-   rewind ( arq );
+   arq = fopen ( "log.txt", "r" );  /*Imprime as batalhas ocorridas nos rounds*/
+   rewind ( arq );                  /*Move o cursor para o início do arquivo*/
    printf("\n\n");
 
    while ( 1 ) {
 
-      cursor = fgetc ( arq );
+      cursor = fgetc ( arq );   /*O char do arquivo vai sendo passado para o cursor e vai sendo imprimido na tela*/
       if ( cursor == 126 ) {    /*O arquivo para de ser impresso quando o ~ (126) é encontrado*/
          break;
       }
@@ -340,9 +340,9 @@ void log_print ( ) {
    fclose ( arq );
 }
 
-void log_clear ( ) {
+void log_clear () {
 
-   remove ( "log2.txt" );
+   remove ( "log2.txt" );       /*Apaga o log para as proximas partidas*/
    remove ( "log.txt");
 
 }

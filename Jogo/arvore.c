@@ -75,6 +75,7 @@ void tree_print_preorder(t_node* root){
 
 }
 
+/*--------------------------------------------------------------------------------------------*/
 
 void tree_print_width(t_node* root){
     if(root == NULL){
@@ -91,7 +92,9 @@ void tree_print_width(t_node* root){
 
         node = retirar(fila);
 
-        printf("%s\n", root->character->name);
+        if(node->character != NULL){
+            print_node(node);
+        }
 
         if(node->left != NULL){
             inserir(fila, node->left);
@@ -104,13 +107,13 @@ void tree_print_width(t_node* root){
     }
 
     apagafila(fila);
-    
+
     return;
 }
 
 /*--------------------------------------------------------------------------------------------*/
 
-t_node* character_search_tree(cNode* element, t_node* root, t_node *retorno){    /**/
+t_node* character_search_tree(cNode* element, t_node* root, t_node *retorno){    /*Procura um personagem da lista na árvore*/
 
     if(root == NULL){
         return NULL;
@@ -123,10 +126,10 @@ t_node* character_search_tree(cNode* element, t_node* root, t_node *retorno){   
 
     }
 
-    if ( retorno == NULL ) {
+    if (retorno == NULL) {
     retorno = character_search_tree(element, root->left, retorno);
     }
-    if ( retorno == NULL ) {
+    if (retorno == NULL) {
     retorno = character_search_tree(element, root->right, retorno);
     }
 
@@ -149,15 +152,15 @@ t_node* tree_create(){                              /*Chama a função tree_fill
 
 t_node* tree_fill(t_node* root){                      /* Para uso no trabalho, a entrada deve ser sempre a primeira raiz da arvore. */
 
-   if ( root->right == NULL && root->left == NULL ) { /* Caso essa condicao seja verdadeira, nivel atual == ultimo nivel */
+   if (root->right == NULL && root->left == NULL) { /* Caso essa condicao seja verdadeira, nivel atual == ultimo nivel */
 
       root->right = node_create();                    /* Cria dois nos no proximo nivel ( novo ultimo nivel ) */
       root->left  = node_create();
 
    } else {                                           /* Caso falsa, checa ambos os nos proximos do atual */
 
-      tree_fill( root->right );
-      tree_fill( root->left  );
+      tree_fill(root->right);
+      tree_fill(root->left);
 
    }
 
@@ -197,4 +200,9 @@ void tree_free(t_node* tree){                           /*Função que libera a 
 
 void print_node(t_node* root){
     printf("%s\n", root->character->name);
+    printf("%s\n", root->character->house);
+    printf("%d\n", root->character->agility);
+    printf("%d\n", root->character->strength);
+    printf("%d\n", root->character->intelligence);
+    printf("%d\n", root->character->health);
 }

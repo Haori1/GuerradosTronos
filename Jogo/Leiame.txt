@@ -1,0 +1,21 @@
+Trabalho 2 de Estrutura de dados feita por:
+Henrique Mendes de Freitas Mariano - 17/0012280.
+Gabriel Santos Menezes - 17/0050157.
+Compilação:
+Por makefile ou pelo terminal utilizando os seguintes arquivos:
+gcc arvore.c -g -c
+gcc escolha.c -g -c
+gcc batalha.c -g -c
+gcc fila.c -g -c
+gcc lista.c -g -c
+gcc tela_inicial.c -g -c
+gcc game.c -g -c
+gcc lertxt.c -g -c
+gcc main.c arvore.o escolha.o batalha.o fila.o lista.o tela_inicial.o game.o lertxt.o -g -o got
+
+Ambiente de programação:
+   -Ubuntu 16.04.2 LTS
+   -Kali GNU/Linux Rolling 4.13.0
+   -GCC 7.2.0
+   -gedit 3.18.3
+   -Atom 1.18.0

@@ -1,6 +1,6 @@
 #include "lertxt.h"
 
-/* FUNCAO 1 --- IDENTIFICA NUMERO DE PERSONAGENS NO ARQUIVO DE ENTRADA */
+/*-----------------------------------------------------------------------------------*/
 
 int character_number( FILE *fp, int num, char cur ) {
 
@@ -18,7 +18,7 @@ int character_number( FILE *fp, int num, char cur ) {
    return num;
 }
 
-/* FUNCAO 2 --- GERA UM VETOR COM 16 NUMEROS ALEATORIOS E UNICOS ENTRE 1 e n, ONDE n == VALOR DE ENTRADA */
+/*-----------------------------------------------------------------------------------*/
 
 int* lucky_sixteen( int num ) {
 
@@ -40,14 +40,14 @@ int* lucky_sixteen( int num ) {
       numb = ( rand() % ( num + 1 ) ) ;
       while ( ctrb < 16 ) {
 
-         if ( vec[ctrb] == numb ) {
+         if ( vec[ctrb] == numb ) {             /*Se o número sorteado for igual o número do vetor, valor sorteado não é inserido no vetor*/
             break;
          } else {
             ctrb++;
          }
 
       }
-      if ( ctrb == 16 ) {
+      if ( ctrb == 16 ) {                       /*Quando o vetor chega ao final e não há números repetidos o número é colocado no vetor e a posição do vetor é incrementada*/
          vec[ctra] = numb;
          ctra++;
       }
@@ -57,7 +57,7 @@ int* lucky_sixteen( int num ) {
    return vec;
 }
 
-/* FUNCAO 3 --- RETORNA UM VETOR CONTENDO UMA STRING LIDA DE UM ARQUIVO DE ENTRADA, LE ATE ENCONTRAR UMA VIRGULA */
+/*-----------------------------------------------------------------------------------*/
 
 char* string_read ( FILE *fp ) {
 
@@ -86,7 +86,7 @@ char* string_read ( FILE *fp ) {
    return vec;
 }
 
-/* FUNCAO 4 --- MOVE O CURSOR PARA A LINHA DO ARQUIVO INFORMADA */
+/*-----------------------------------------------------------------------------------*/
 
 void line_locate ( FILE *fp, int line ) {
 
@@ -106,9 +106,9 @@ void line_locate ( FILE *fp, int line ) {
    return;
 }
 
-/* FUNCAO 5 --- PREENCHE UMA LISTA COM OS PERSONAGENS */
+/*-----------------------------------------------------------------------------------*/
 
-void list_populate ( FILE *fp, int *vec, cList *list ) {    /*Arquivo, Vetor de números aleatórios, lista*/
+void list_populate ( FILE *fp, int *vec, cList *list ) {
 
    Character *character_cast, *character;
    int ctr = 0;
@@ -135,7 +135,7 @@ void list_populate ( FILE *fp, int *vec, cList *list ) {    /*Arquivo, Vetor de 
    return;
 }
 
-/* FUNCAO 6 --- ALOCA MEMORIA PARA O PERSONAGEM */
+/*-----------------------------------------------------------------------------------*/
 
 Character* character_create ( char *_name, char *_house, int _agility, int _strength, int _intelligence, int _health) {
 
@@ -154,7 +154,7 @@ Character* character_create ( char *_name, char *_house, int _agility, int _stre
    return character;
 }
 
-/* FUNCAO 7 --- LE ARQUIVO E GERA LISTA COM PERSONAGENS ALEATORIOS */
+/*-----------------------------------------------------------------------------------*/
 
 cList* create_roster ( FILE *fp ) {
    int num = 0;
