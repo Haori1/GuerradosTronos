@@ -2,10 +2,7 @@
 
 /* FUNCAO 1 --- IDENTIFICA NUMERO DE PERSONAGENS NO ARQUIVO DE ENTRADA */
 
-int character_number( FILE *fp ) {
-
-   int num = 0;
-   char cur;
+int character_number( FILE *fp, int num, char cur ) {
 
    while ( cur != EOF ) {   /*End of file*/
 
@@ -160,8 +157,9 @@ Character* character_create ( char *_name, char *_house, int _agility, int _stre
 /* FUNCAO 7 --- LE ARQUIVO E GERA LISTA COM PERSONAGENS ALEATORIOS */
 
 cList* create_roster ( FILE *fp ) {
-
-   int num = character_number( fp );
+   int num = 0;
+   char cur = '0';
+   num = character_number( fp, num, cur );
    int *vec = lucky_sixteen ( num );
    cList *list = list_create();
    list_populate ( fp, vec, list );

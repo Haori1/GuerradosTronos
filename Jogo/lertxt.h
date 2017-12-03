@@ -7,7 +7,7 @@
 #ifndef __ler_txt___
 #define __ler_txt___
 
-int character_number( FILE *fp );
+int character_number( FILE *fp, int num, char cur );
 int* lucky_sixteen( int num );
 char* string_read ( FILE *fp );
 void list_populate ( FILE *fp, int *vec, cList *list );
