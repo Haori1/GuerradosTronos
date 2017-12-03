@@ -14,7 +14,9 @@ void update_stat ( Character* player, int choice );
 void log_update ( Character* winner, Character* loser, int choice );
 void log_round ( int num );
 void log_end ( Character* player, Character* enemy, int choice );
+void log_victory ( Character* winner );
 void log_terminate ( );
 void log_print ( );
+void log_clear ( );
 
 #endif

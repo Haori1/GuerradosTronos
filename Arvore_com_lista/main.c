@@ -19,8 +19,16 @@ int main(void){
     int i = escolha(list);
     aux = character_search(i - 1, list);
     player = character_search_tree(aux, root, retorno);
+    log_clear ();
+    log_round ( 1 );
     battle_finder ( root, player );
-    printf("%s\n", player->character->name);
+    log_round ( 2 );
+    battle_finder ( root, player );
+    log_round ( 3 );
+    battle_finder ( root, player );
+    log_round ( 4 );
+    battle_finder ( root, player );   
+    log_victory ( root->character );
     log_print();
     free_list(list);
     tree_free(root);

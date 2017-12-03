@@ -248,7 +248,7 @@ void log_round ( int num ) {
 
    FILE *arq = fopen ( "log.txt", "a+" );
 
-   fprintf ( arq, "ROUND %d:\n", num );
+   fprintf ( arq, "\nROUND %d:\n\n", num );
 
    fclose ( arq );
 
@@ -257,7 +257,6 @@ void log_round ( int num ) {
 void log_end ( Character* player, Character* enemy, int choice ) {
 
    FILE *arq = fopen ( "log2.txt", "a+" );
-   rewind ( arq );
 
    switch ( choice ) {
 
@@ -277,9 +276,19 @@ void log_end ( Character* player, Character* enemy, int choice ) {
          break;
       }
 
-   
+   fclose ( arq );
 
    return;
+}
+
+void log_victory ( Character* winner ) {
+
+   FILE *arq = fopen ( "log2.txt", "a+" );
+
+   fprintf ( arq, "%s da Casa %s foi vitorioso. ", winner->name, winner->house);
+
+   fclose ( arq );
+
 }
 
 void log_terminate ( ) {
@@ -315,12 +324,25 @@ void log_print ( ) {
    rewind ( arq );
    printf("\n\n");
  
-   while ( cursor != EOF && cursor != 126 ) {
+   while ( 1 ) {
 
       cursor = fgetc ( arq );
+      if ( cursor == 126 ) {
+         break;
+      }
+      if ( feof ( arq ) ) {
+         break;
+      }
       printf("%c", cursor);
 
    }
    
    fclose ( arq );
+}
+
+void log_clear ( ) {
+
+   remove ( "log2.txt" );
+   remove ( "log.txt");
+
 }
