@@ -135,7 +135,7 @@ t_node* character_search_tree(cNode* element, t_node* root, t_node *retorno){   
 
     return retorno;
 
-}//end character_search_tree()
+}/*end character_search_tree()*/
 
 /*--------------------------------------------------------------------------------------------*/
 
