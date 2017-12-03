@@ -1,27 +1,27 @@
 
 ROUND 1:
 
-Jaime (72 Health) x Tommen (49 Health)
-Ned (60 Strength) x Tyrion (50 Strength)
-Arya (80 Agility) x Jon Snow (58 Agility)
-The Hound (50 Agility) x Sansa (20 Agility)
-Brienne (62 Agility) x The Mountain (30 Agility)
-Oberyn (75 Agility) x Aegon (50 Agility)
-Robb (50 Agility) x Cercei (35 Agility)
-Theon (35 Agility) x Margaery (25 Agility)
+Stanis (55 Strength) x Theon (40 Strength)
+Khal Drogo (53 Agility) x The Mountain (30 Agility)
+Ned (40 Agility) x Margaery (25 Agility)
+Robb (50 Agility) x Sansa (20 Agility)
+Jon Snow (58 Agility) x Tommen (52 Agility)
+Jon Snow (58 Agility) x Daenerys (20 Agility)
+Oberyn (75 Agility) x The Hound (50 Agility)
+Aegon (50 Agility) x Cercei (35 Agility)
 
 ROUND 2:
 
-Ned (80 Health) x Jaime (72 Health)
-Arya (80 Agility) x The Hound (50 Agility)
-Oberyn (75 Agility) x Brienne (62 Agility)
-Robb (50 Agility) x Theon (35 Agility)
+Khal Drogo (72 Strength) x Stanis (55 Strength)
+Ned (80 Health) x Robb (60 Health)
+Jon Snow (50 Health) x Jon Snow (50 Health)
+Oberyn (61 Health) x Aegon (57 Health)
 
 ROUND 3:
 
-Ned (60 Strength) x Arya (45 Strength)
-Oberyn (61 Health) x Robb (60 Health)
+Khal Drogo (53 Agility) x Ned (40 Agility)
+Oberyn (75 Agility) x Jon Snow (58 Agility)
 
 ROUND 4:
 
-Ned (80 Health) x Oberyn (61 Health)
+Khal Drogo (72 Strength) x Oberyn (60 Strength)

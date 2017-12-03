@@ -1,0 +1,3 @@
+/root/GuerradosTronos/Main/CMakeFiles/rebuild_cache.dir
+/root/GuerradosTronos/Main/CMakeFiles/got.dir
+/root/GuerradosTronos/Main/CMakeFiles/edit_cache.dir
