@@ -9,7 +9,7 @@ typedef struct {
    int agility;     /* Valores de 0 a 100 */
    int strength;
    int intelligence;
-   int health;   
+   int health;
 
 } Character;
 
@@ -20,11 +20,11 @@ typedef struct {
 
 /* leia o leiame pls */
 
-typedef struct node {
+typedef struct nodeq {
 
    Character* character;
-   struct node *next;
-   struct node *prev;
+   struct nodeq *next;
+   struct nodeq *prev;
 
 } cNode;
 
@@ -37,6 +37,7 @@ typedef struct {
 
 cList* list_create();
 cNode* cNode_create ( Character* character );
+cNode* character_search(int pos, cList* list);
 void free_list ( cList *list );
 void add_cNode ( int pos, Character* character, cList *list );
 void rem_cNode ( int pos, cList *list );

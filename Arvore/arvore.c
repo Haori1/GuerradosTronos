@@ -7,76 +7,136 @@
 
 /*--------------------------------------------------------------------------------------------*/
 
-t_node* tree_character_fill(t_node* root){
-    if(root == NULL){
+cList* list_fill(cList* list){
+    FILE* fp = fopen("personagens.txt", "r");           /*O ponteiro fp recebe o arquivo.*/
 
-        return root;
-    }
-
-    FILE* fp = fopen("personagens.txt", "r");           //O ponteiro fp recebe o arquivo.
-
-    cList* list = create_roster(fp);                    //Lista com os personagens.
+    list = create_roster(fp);                           /*Lista com os personagens.*/
 
     fclose(fp);
 
-    fila* fila = alocafila();                           //Criação da fila.
+    return list;
+}
 
-    t_node* node = NULL;                                //Nó que recebe da fila.
+/*--------------------------------------------------------------------------------------------*/
 
-    cNode* aux = NULL;                                  //Var. Aux.
+void tree_character_fill(t_node* root, cList* list, cNode* aux){    /*Preenche os nós folhas da árvore com os personagens*/
+    if(root == NULL){
 
-    inserir(fila, root);                                //A raiz é enfileirada.
+        return;
+    }
+    fila* fila = alocafila();
 
-    aux = list->first;                                  //A var. aux recebe o primeiro da lista.
+    t_node* node = NULL;
 
-    while(!verivazia(fila)){                            //Enquanto a fila não estiver vazia o processo continua.
+    inserir(fila, root);
 
-        node = retirar(fila);                           //O nó recebe o primeiro da fila.
+    aux = list->first;
 
-        if(node->left == NULL && node->right == NULL){  //Se o nó for folha ele recebe um personagem da lista.
+    while(!verivazia(fila)){
+        node = retirar(fila);
 
+        if(node->left == NULL && node->right == NULL){
             node->character = aux->character;
-
             aux = aux->next;
-
         }
 
-        if(node->left != NULL){                         //A fila permite percorrer a arvore em largura.
-
+        if(node->left != NULL){
             inserir(fila, node->left);
-
-        } else if(node->right != NULL){
-
+        }
+        if(node->right != NULL){
             inserir(fila, node->right);
-
-        }//end if() largura
-    }//end while()
+        }
 
 
+    }/*end while()*/
 
     apagafila(fila);
-    return root;
-}
+
+
+    return;
+}/*end tree_character_fill()*/
 
 /*--------------------------------------------------------------------------------------------*/
 void tree_print_preorder(t_node* root){
-    if(root == NULL){                   //Se a raiz estiver vazia a função retorna.
+    if(root == NULL){                   /*Se a raiz estiver vazia a função retorna.*/
 
         return;
 
-    } else {
-
-    print_node(root);                   //Processa a raiz.
-    tree_print_preorder(root->left);    //Chamada recursiva a esquerda.
-    tree_print_preorder(root->right);   //Chamada recursiva a direita.
-
     }
+
+    if(root->character != NULL){
+
+        print_node(root);                   /*Processa a raiz.*/
+    }
+    tree_print_preorder(root->left);    /*Chamada recursiva a esquerda.*/
+    tree_print_preorder(root->right);   /*Chamada recursiva a direita.*/
+
+    return;
+
 }
 
 
+void tree_print_width(t_node* root){
+    if(root == NULL){
+
+        return;
+    }
+    fila* fila = alocafila();
+
+    t_node* node = NULL;
+
+    inserir(fila, root);
+
+    while(!verivazia(fila)){
+
+        node = retirar(fila);
+
+        printf("%s\n", root->character->name);
+
+        if(node->left != NULL){
+            inserir(fila, node->left);
+        }
+        if(node->right != NULL){
+            inserir(fila, node->right);
+        }
+
+
+    }
+
+    apagafila(fila);
+    
+    return;
+}
+
 /*--------------------------------------------------------------------------------------------*/
 
-t_node* tree_create(){
+t_node* character_search_tree(cNode* element, t_node* root, t_node *retorno){    /**/
+
+    if(root == NULL){
+        return NULL;
+    }
+
+    if(root->character == element->character){
+
+        retorno = root;
+        return retorno;
+
+    }
+
+    if ( retorno == NULL ) {
+    retorno = character_search_tree(element, root->left, retorno);
+    }
+    if ( retorno == NULL ) {
+    retorno = character_search_tree(element, root->right, retorno);
+    }
+
+    return retorno;
+
+}//end character_search_tree()
+
+/*--------------------------------------------------------------------------------------------*/
+
+t_node* tree_create(){                              /*Chama a função tree_fill() 4 vezes para preencher os níveis da árvore*/
 
     t_node* root = node_create();
     for(int i = 0; i < 4; i++){
@@ -121,6 +181,20 @@ t_node* node_create(){                                  /* Função que aloca o 
     return node;                                        /* Retorno do nó criado. */
 }
 
+/*--------------------------------------------------------------------------------------------*/
+
+void tree_free(t_node* tree){                           /*Função que libera a árvore de forma recursiva*/
+    if(tree == NULL){
+        return;
+    }
+
+    tree_free(tree->left);
+    tree_free(tree->right);
+    free(tree);
+}
+
+/*--------------------------------------------------------------------------------------------*/
+
 void print_node(t_node* root){
-    printf(" %s\n", root->character->name);
+    printf("%s\n", root->character->name);
 }

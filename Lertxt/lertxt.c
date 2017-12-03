@@ -5,17 +5,17 @@
 int character_number( FILE *fp ) {
 
    int num = 0;
-   char cur;   
-   
-   while ( cur != EOF ) {
+   char cur;
+
+   while ( cur != EOF ) {   /*End of file*/
 
       cur = fgetc ( fp );
       if ( cur == 012 ) {  /* ASCII 012 == newline */
 
          num++;
 
-      } 
-   
+      }
+
    }
 
    return num;
@@ -28,14 +28,14 @@ int* lucky_sixteen( int num ) {
    srand ( time ( NULL ) );   /* Define a semente a ser usada */
 
    int *vec = ( int * ) malloc ( 16 * (sizeof ( int ) ) ),
-        ctra = 0, ctrb = 0, numb = 0                      ; 
-   
+        ctra = 0, ctrb = 0, numb = 0                      ;
+
    while ( ctrb < 16 ) {   /* Garante que nao tenha nenhum lixo no vetor */
 
-      vec[ctrb] == -1;
+      vec[ctrb] = -1;
       ctrb++;
 
-   } 
+   }
    ctrb = 0;
 
    while ( ctra < 16 ) {
@@ -56,7 +56,7 @@ int* lucky_sixteen( int num ) {
       }
       ctrb = 0;
    }
-  
+
    return vec;
 }
 
@@ -67,14 +67,14 @@ char* string_read ( FILE *fp ) {
    fpos_t pos;
    int tam = 0, ctr = 0;
 
-   fgetpos ( fp, &pos );
-   while ( fgetc ( fp ) != 054 ) { /* ASCII 054 == virgula */
+   fgetpos ( fp, &pos );                /*Salva a posição do cursor dentro do arquivo*/
+   while ( fgetc ( fp ) != 054 ) { /* ASCII 054 == virgula */   /*Conta o numero de letras ate a virgula*/
 
       tam++;
 
-   }  
+   }
    char *vec = ( char * ) malloc ( ( tam + 1 ) * sizeof ( char ) );
-   vec[tam] = 000; /* ASCII 000 == NULL */
+   vec[tam] = 000; /* ASCII 000 == NULL */  // possível erro para a função de buscar o personagem na árvore
    fsetpos ( fp, &pos );
 
    while ( ctr < tam ) {
@@ -83,8 +83,8 @@ char* string_read ( FILE *fp ) {
       ctr++;
 
    }
-   fseek ( fp, 2, SEEK_CUR ); /* Avanca o cursor duas posicoes, 'engolindo' a virgula e o espaco que vem a seguir. */
-   
+   fseek ( fp, 2, SEEK_CUR ); /* Avanca o cursor duas posicoes, 'engolindo' a virgula e o espaco que vem a seguir. */ /*Pula 2 bytes, espaço e vírgula*/
+
 
    return vec;
 }
@@ -97,21 +97,21 @@ void line_locate ( FILE *fp, int line ) {
 
       rewind ( fp );
 
-      while ( ctr < line ) { 
+      while ( ctr < line ) {
 
          if ( fgetc ( fp ) == 012 ) { /* ASCII 012 == newline */
             ctr++;
          }
 
       }
-      
+
 
    return;
 }
 
 /* FUNCAO 5 --- PREENCHE UMA LISTA COM OS PERSONAGENS */
 
-void list_populate ( FILE *fp, int *vec, cList *list ) {
+void list_populate ( FILE *fp, int *vec, cList *list ) {    /*Arquivo, Vetor de números aleatórios, lista*/
 
    Character *character_cast, *character;
    int ctr = 0;
@@ -142,9 +142,9 @@ void list_populate ( FILE *fp, int *vec, cList *list ) {
 
 Character* character_create ( char *_name, char *_house, int _agility, int _strength, int _intelligence, int _health) {
 
-   Character *character = malloc ( sizeof ( Character ) );
+   Character *character = (Character *) malloc ( sizeof ( Character ) );
    character->name  = ( char * ) malloc ( sizeof(char) * ( strlen (_name) + 1 ) );
-   character->house = ( char * ) malloc ( sizeof(char) * ( strlen (_house) + 1 ) );   
+   character->house = ( char * ) malloc ( sizeof(char) * ( strlen (_house) + 1 ) );
 
    strcpy ( character->name, _name );
    strcpy ( character->house, _house );
@@ -160,7 +160,7 @@ Character* character_create ( char *_name, char *_house, int _agility, int _stre
 /* FUNCAO 7 --- LE ARQUIVO E GERA LISTA COM PERSONAGENS ALEATORIOS */
 
 cList* create_roster ( FILE *fp ) {
-   
+
    int num = character_number( fp );
    int *vec = lucky_sixteen ( num );
    cList *list = list_create();

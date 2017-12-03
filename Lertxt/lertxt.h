@@ -4,23 +4,6 @@
 #include <time.h>
 #include "lista.h"
 
-#ifndef __TIPO__CHARACTER_
-#define __TIPO__CHARACTER_
-
-typedef struct {
-
-   char *name;
-   char *house;
-
-   int agility;     /* Valores de 0 a 100 */
-   int strength;
-   int intelligence;
-   int health;   
-
-} Character;
-
-#endif
-
 #ifndef __ler_txt___
 #define __ler_txt___
 
